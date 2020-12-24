@@ -19,45 +19,45 @@ namespace Tugas_Week_14
 
         private void buttonKonversi_Click(object sender, EventArgs e)
         {
-            int c = 1;
-            string kalimat = textBoxKalimat.Text;
-            string dari = textBoxHuruf.Text;
-            string menjadi = textBoxMenjadi.Text;
-            //int[] simpan = new int[2];
+            int c = 0;
+            string lcasekalimat = textBoxKalimat.Text;
+            string kalimat = lcasekalimat.ToUpper();
+            string lcasedari = textBoxHuruf.Text;
+            string dari = lcasedari.ToUpper();
+            string lcasemenjadi = textBoxMenjadi.Text;
+            string menjadi = lcasemenjadi.ToUpper();
+
+            string daftarhuruf = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             string konversi = "";
-            string[] huruf = new string[27];
-            huruf[1] = "A";
-            huruf[2] = "B";
-            huruf[3] = "C";
-            huruf[4] = "D";
-            huruf[5] = "E";
-            huruf[6] = "F";
-            huruf[7] = "G";
-            huruf[8] = "H";
-            huruf[9] = "I";
-            huruf[10] = "J";
-            huruf[11] = "K";
-            huruf[12] = "L";
-            huruf[13] = "M";
-            huruf[14] = "N";
-            huruf[15] = "O";
-            huruf[16] = "P";
-            huruf[17] = "Q";
-            huruf[18] = "R";
-            huruf[19] = "S";
-            huruf[20] = "T";
-            huruf[21] = "U";
-            huruf[22] = "V";
-            huruf[23] = "W";
-            huruf[24] = "X";
-            huruf[25] = "Y";
-            huruf[26] = "Z";
+            string[] huruf = new string[26];
+            huruf[0] = "A";
+            huruf[1] = "B";
+            huruf[2] = "C";
+            huruf[3] = "D";
+            huruf[4] = "E";
+            huruf[5] = "F";
+            huruf[6] = "G";
+            huruf[7] = "H";
+            huruf[8] = "I";
+            huruf[9] = "J";
+            huruf[10] = "K";
+            huruf[11] = "L";
+            huruf[12] = "M";
+            huruf[13] = "N";
+            huruf[14] = "O";
+            huruf[15] = "P";
+            huruf[16] = "Q";
+            huruf[17] = "R";
+            huruf[18] = "S";
+            huruf[19] = "T";
+            huruf[20] = "U";
+            huruf[21] = "V";
+            huruf[22] = "W";
+            huruf[23] = "X";
+            huruf[24] = "Y";
+            huruf[25] = "Z";
 
-            kalimat.ToUpper();
-            dari.ToUpper();
-            menjadi.ToUpper();
-
-            while(dari != huruf[c])
+            while (dari != huruf[c])
             {
                 c++;
             }
@@ -69,17 +69,35 @@ namespace Tugas_Week_14
                 c++;
             }
             int simpan2 = c;
-
-            int selisih = simpan1 - simpan2;
-            
-            for (int i=1; i<=kalimat.Length; i++)
+            int hasil = 0;           
+            int selisih = simpan2 - simpan1;
+            for (int i = 0; i < kalimat.Length; i++)
             {
                 c = 0;
-                while (kalimat[i] != huruf[c])
+                if(kalimat[i] != ' ')
                 {
-                    c++;
+                    while (kalimat[i] != daftarhuruf[c])
+                    {
+                        c++;
+                    }
+                    hasil = c + selisih;
+                    if (hasil >= 0 && hasil <= 25)
+                    {
+                        konversi = konversi + daftarhuruf[hasil];
+                    }
+                    else if (hasil > 25)
+                    {
+                        konversi = konversi + daftarhuruf[hasil - 26];
+                    }
+                    else if (hasil < 25)
+                    {
+                        konversi = konversi + daftarhuruf[hasil + 26];
+                    }
                 }
-                konversi = konversi + kalimat[c + selisih];
+                else if(kalimat[i] == ' ')
+                {
+                    konversi = konversi + " ";
+                }
             }
             labelKonversi.Text = konversi;
         }
